@@ -16,7 +16,7 @@ key_list = list(costs.keys())
 
 value_list = list(costs.values())
 
-
+al
 if 'Housing' not in key_list:
     costs['Housing'] = 1200
 else:
