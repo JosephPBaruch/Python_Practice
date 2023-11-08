@@ -57,5 +57,8 @@ def grayscale_c(img):
 # ultralytics ( later down the road and something to look forward to)
 new_img = grayscale_c(img_array)
 # ------ Resize an Image -------
-new_img = my_img.resize((255, 255), resample=PIL.Image.BILINEAR)
-    
+new_img = new_img.resize((255, 255), resample=PIL.Image.BILINEAR)
+
+new_img.show()    
+
+
