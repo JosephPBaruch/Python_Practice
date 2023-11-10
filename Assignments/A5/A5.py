@@ -21,6 +21,8 @@ class shoes:
         """
             This method "uses" the shoe and decreases its health
         """
+        if self._health <= 1: 
+            print("Shoe is dead. Buy a new one")
         self._health -= 1
         
     def trending(self, pop):
@@ -33,7 +35,7 @@ class shoes:
         """
             This dunder method prints all the attributes of the class. 
         """
-        return f"New shoe created. Owner: {self._owner}, Health: {self._health}, Popularity: {self._popularity}"
+        return f"Owner: {self._owner}, Health: {self._health}, Popularity: {self._popularity}"
 
 boots = shoes("Joe", 15, 15) # Create instance of the class
 boots.use() # decrease health by one
