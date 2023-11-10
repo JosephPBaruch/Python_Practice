@@ -73,5 +73,5 @@ plt.xticks(rotation=45, ha='right')
 
 plt.show()     
 
-
+IBM_data.head()
 
