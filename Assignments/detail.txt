@@ -1,0 +1,11 @@
+*Task: The purpose of this assignment is to get familiar with the openCV library in Python. For this assignment, we will be performing edge detection on a low contrast image, and then performing edge detection on that same starting image, however after running histogram equalization. The specific tasks are as followed: 1.) Find a low contrast image; 2.) Transform this image to grayscale and resize the image to (256, 256); 3.) Perform edge detection on the image; 4.) On the grayscale image, perform histogram equalization and then perform edge detection again. ONLY USE OpenCV methods! 
+
+ 
+
+Your submission should include two files, including:
+
+one .py or .ipynb file that contains your code
+one report (accept .pdf/.doc/.docx/.txt/.rtf files) contains:
+The assignment header
+Your information
+A description of the openCV functions that you used, 5 labeled images (the original image, the grayscale image, the edge detection from step 3, the image after histogram equalization, and the final image after the final edge detection). Compare the results from the 2 separate edge detection runs.
