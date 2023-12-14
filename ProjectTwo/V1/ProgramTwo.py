@@ -85,7 +85,7 @@ def augment_and_add():
             image = cv2.imread(file)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             transformed = transform(image=image)['image']
-            cv2.imwrite('tran_' + file , transformed)
+            cv2.imwrite('2_tran_' + file , transformed)
     os.chdir('/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1')
 
 #resize()
@@ -93,6 +93,6 @@ def augment_and_add():
 
 
 model = YOLO("yolov8n-cls.pt")
-model.train(data='./data', epochs=200)
+model.train(data='./data', epochs=400)
 
 
