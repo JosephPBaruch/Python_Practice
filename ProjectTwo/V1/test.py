@@ -1,10 +1,14 @@
-import cv2
+'''
+    Joseph Baruch
+    December 15, 2023
+    Program Two: Image Classification
+    Description: Test model by extracting it from 'runs' directory. 
+'''
 from ultralytics import YOLO
 import ultralytics
 ultralytics.checks()
 import os
 import PIL
-# import albumentations as A
 os. chdir('/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1') 
 
 new_model = YOLO('./runs/classify/train7/weights/best.pt')
@@ -24,7 +28,7 @@ def predict():
     for file in file_list:
         new_model(path + file)
 
-# resize()
+resize()
 predict()
 
 ''' Epoch 60 (train4): 

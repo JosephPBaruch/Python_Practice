@@ -1,3 +1,10 @@
+'''
+    Joseph Baruch
+    December 15, 2023
+    Program Two: Image Classification
+    Description: Prepare images by resizing and augmenting for the training 
+    of Ultralytics YOLOV8 image classificaiton model yolov8n-cls.
+'''
 import cv2
 from ultralytics import YOLO
 import ultralytics
@@ -6,34 +13,10 @@ import os
 import PIL
 import albumentations as A
 
-os.chdir('/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1') 
+basePATH = '/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1'
+os.chdir(basePATH) 
 
-train_path = './data/train/coniferous/'
-test_path = './data/test/coniferous/'
-val_path = './data/val/coniferous/'
-
-train_path2 = './data/train/desert/'
-test_path2 = './data/test/desert/'
-val_path2 = './data/val/desert/'
-
-train_path3 = './data/train/grassland/'
-test_path3 = './data/test/grassland/'
-val_path3 = './data/val/grassland/'
-
-train_path4 = './data/train/rain_forest/'
-test_path4 = './data/test/rain_forest/'
-val_path4 = './data/val/rain_forest/'
-
-train_path5 = './data/train/tundra/'
-test_path5 = './data/test/tundra/'
-val_path5 = './data/val/tundra/'
-
-path_lists = [train_path, test_path, val_path,
-              train_path2, test_path2, val_path2,
-              train_path3, test_path3, val_path3,
-              train_path4, test_path4, val_path4,
-              train_path5, test_path5, val_path5]
-
+# Paths to different files for image preparations. 
 train_1 = '/data/train/coniferous/'
 test_1 = '/data/test/coniferous/'
 val_1 = '/data/val/coniferous/'
@@ -60,15 +43,7 @@ path_li = [train_1, test_1, val_1,
         train_4, test_4, val_4,
         train_5, test_5, val_5]
 
-def resize():
-    for path in path_lists:
-        file_list = os.listdir(path)
-        file_list = [file for file in file_list if '.webp' in file]
-        for file in file_list:
-            img = PIL.Image.open(path + file)
-            img = img.resize((512, 512))
-            img.save(path + file)
-
+# Albumentations image augumentation pipline. 
 transform = A.Compose([
     A.RandomCrop(width=512, height=512),
     A.HorizontalFlip(p=0.5),
@@ -76,23 +51,37 @@ transform = A.Compose([
     A.ShiftScaleRotate(p=0.5)
 ])
 
-def augment_and_add():
+def resize():
+    '''
+        Resize all images in data directory by traversing file structure. 
+    '''
     for path in path_li:
-        os.chdir('/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1' + path ) 
-        file_list = os.listdir('/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1' + path)
+        file_list = os.listdir(basePATH + path)
+        file_list = [file for file in file_list if '.webp' in file]
+        for file in file_list:
+            img = PIL.Image.open(basePATH + path + file)
+            img = img.resize((512, 512)) # Size of images changed to 512 x 512
+            img.save(basePATH + path + file) # Save image as origional name
+
+def augment_and_add():
+    '''
+        Augument images using predefined augumentation pipeline. 
+        Traverse file structure in data directory like in 'resize()'
+    '''
+    for path in path_li:
+        os.chdir(basePATH + path ) 
+        file_list = os.listdir(basePATH + path)
         file_list = [file for file in file_list if '.webp' in file]
         for file in file_list:
             image = cv2.imread(file)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             transformed = transform(image=image)['image']
-            cv2.imwrite('2_tran_' + file , transformed)
-    os.chdir('/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1')
+            cv2.imwrite('2_tran_' + file , transformed) # May need to adjust first string if multiple augmentation cycles
+    os.chdir(basePATH)
 
-#resize()
-#augment_and_add()
-
-
-model = YOLO("yolov8n-cls.pt")
+resize()
+augment_and_add()
+model = YOLO("yolov8n-cls.pt") # Train model
 model.train(data='./data', epochs=400)
 
 
