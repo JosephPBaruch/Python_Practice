@@ -1,13 +1,17 @@
-import cv2
+'''
+    Joseph Baruch
+    December 15, 2023
+    Program Two: Image Classification
+    Description: Test model by extracting it from 'runs' directory. 
+'''
 from ultralytics import YOLO
 import ultralytics
 ultralytics.checks()
 import os
 import PIL
-# import albumentations as A
 os. chdir('/Users/joseph.baruch/REPO/Practical_Python/ProjectTwo/V1') 
 
-new_model = YOLO('./runs/classify/train5/weights/best.pt')
+new_model = YOLO('./runs/classify/train7/weights/best.pt')
 path = './test/'
 
 def resize(): 
@@ -41,10 +45,17 @@ predict()
         - 4 Rain Forest:   rain_forest 1.00, desert 0.00, coniferous 0.00, tundra 0.00, grassland 0.00
         - 5 Tundra:        tundra 1.00, desert 0.00, coniferous 0.00, rain_forest 0.00, grassland 0.00
 '''
-''' Epoch : 
-        - Coniferous:    
-        - Desert:        
-        - Grassland:     
-        - Rain Forest:   
-        - Tundra:        
+''' Epoch 200 (train6) with Augmentations: 
+        - Coniferous:      coniferous 0.49, rain_forest 0.48, desert 0.03, grassland 0.00, tundra 0.00
+        - Desert:          grassland 0.60, desert 0.26, coniferous 0.10, tundra 0.04, rain_forest 0.00 
+        - Grassland:       grassland 1.00, tundra 0.00, coniferous 0.00, desert 0.00, rain_forest 0.00
+        - Rain Forest:     rain_forest 1.00, coniferous 0.00, tundra 0.00, desert 0.00, grassland 0.00
+        - Tundra:          tundra 1.00, desert 0.00, coniferous 0.00, rain_forest 0.00, grassland 0.00
+'''
+''' Epoch 400 (train7) with Augmentations + Rotation Aug (stopped at 110/400 epochs): 
+        - Coniferous:      rain_forest 0.92, grassland 0.08, coniferous 0.01, tundra 0.00, desert 0.00
+        - Desert:          grassland 0.68, tundra 0.14, coniferous 0.11, desert 0.05, rain_forest 0.01
+        - Grassland:       grassland 1.00, rain_forest 0.00, tundra 0.00, coniferous 0.00, desert 0.00
+        - Rain Forest:     rain_forest 1.00, tundra 0.00, grassland 0.00, desert 0.00, coniferous 0.00 
+        - Tundra:          tundra 1.00, coniferous 0.00, desert 0.00, grassland 0.00, rain_forest 0.00
 '''
