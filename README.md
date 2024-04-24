@@ -1,2 +1,3 @@
-# Practical_Python
-These are the notes from my Practical Python Course at the University of Idaho. 
+# Python and Machine Learning Projects
+Devoted to learning python and gaining a general sense of the programming language. 
+Focuses on machine learning and data science. 
